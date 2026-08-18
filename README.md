@@ -2,7 +2,8 @@
 
 A futuristic, cyberpunk-themed developer portfolio built with vanilla **HTML**, **CSS**, **JavaScript**, **Three.js**, and **GSAP**.
 
-**Live repo:** [github.com/pradipNP/pradip-portfolio](https://github.com/pradipNP/pradip-portfolio)
+**Live site:** [pradipkumarprajapati.pages.dev](https://pradipkumarprajapati.pages.dev/)  
+**Repository:** [github.com/pradipNP/pradip-portfolio](https://github.com/pradipNP/pradip-portfolio)
 
 ---
 
@@ -40,7 +41,7 @@ A futuristic, cyberpunk-themed developer portfolio built with vanilla **HTML**, 
 | UI / Motion | GSAP, ScrollTrigger |
 | 3D / Canvas | Three.js r128 |
 | Contact | [FormSubmit.co](https://formsubmit.co) (AJAX) |
-| Deployment | Static site — GitHub Pages, Netlify, or any static host |
+| Deployment | [Cloudflare Pages](https://pages.cloudflare.com/) |
 
 **Skills highlighted:** Python · JavaScript · Vue.js · Node.js · Express.js · PostgreSQL · Docker · AWS Cloud · Postman · PyCharm · Machine Learning · REST APIs
 
@@ -133,11 +134,18 @@ The form uses **FormSubmit.co**. On first submission, check your inbox and activ
 
 ---
 
-## Deploy to GitHub Pages
+## Deployment
 
-1. Push to `main` on [pradip-portfolio](https://github.com/pradipNP/pradip-portfolio)
-2. **Settings → Pages → Source:** Deploy from branch `main` / root
-3. Site URL: `https://pradipNP.github.io/pradip-portfolio/`
+This portfolio is live on **Cloudflare Pages**:
+
+**[https://pradipkumarprajapati.pages.dev/](https://pradipkumarprajapati.pages.dev/)**
+
+To redeploy after pushing to GitHub:
+
+1. Connect [pradip-portfolio](https://github.com/pradipNP/pradip-portfolio) to Cloudflare Pages
+2. Build command: *(none — static site)*
+3. Output directory: `/` (project root)
+4. Push to `main` — Cloudflare rebuilds automatically
 
 ---
 
