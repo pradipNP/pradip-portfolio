@@ -129,4 +129,7 @@ Full Stack Developer · B.Tech CSE @ KIIT University · Nepal
 
 ## License
 
-MIT — free to use and customize for your own portfolio.
+This project is proprietary and intended for portfolio purposes only.
+
+Copyright © 2026 Pradip Kumar Prajapati.
+All Rights Reserved.
