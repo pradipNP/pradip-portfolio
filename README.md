@@ -59,24 +59,6 @@ Edit projects in `js/main.js` → `PROJECTS` array.
 
 ---
 
-## Quick Start
-
-### Option 1 — Local server (recommended)
-
-```bash
-python -m http.server 5500
-```
-
-Open [http://localhost:5500](http://localhost:5500)
-
-### Option 2 — VS Code Live Server
-
-Right-click `index.html` → **Open with Live Server**
-
-> Avoid opening `index.html` directly as a `file://` URL — some assets (globe map, form) require HTTP.
-
----
-
 ## Project Structure
 
 ```
@@ -131,21 +113,6 @@ The form uses **FormSubmit.co**. On first submission, check your inbox and activ
 | `Ctrl+K` | Open command palette |
 | `Esc` | Close modals / palette |
 | `↑↑↓↓←→←→BA` | Konami easter egg |
-
----
-
-## Deployment
-
-This portfolio is live on **Cloudflare Pages**:
-
-**[https://pradipkumarprajapati.pages.dev/](https://pradipkumarprajapati.pages.dev/)**
-
-To redeploy after pushing to GitHub:
-
-1. Connect [pradip-portfolio](https://github.com/pradipNP/pradip-portfolio) to Cloudflare Pages
-2. Build command: *(none — static site)*
-3. Output directory: `/` (project root)
-4. Push to `main` — Cloudflare rebuilds automatically
 
 ---
 
