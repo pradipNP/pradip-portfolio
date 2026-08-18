@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Full Stack Developer Portfolio — Python, JavaScript, Node.js, Express, Vue.js, PostgreSQL, Docker, AWS Cloud, Postman, PyCharm, Machine Learning, and modern web technologies.">
+  <meta name="keywords" content="full stack developer, portfolio, web developer, javascript, node.js, cyberpunk">
+  <meta name="author" content="Full Stack Developer">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Full Stack Developer Portfolio">
+  <meta property="og:description" content="Building Modern Web Applications — Full Stack Developer Portfolio">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#0a0a1a">
+  <title>Full Stack Developer | Portfolio</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/responsive.css">
+
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌌</text></svg>">
+</head>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- Loading Screen -->
+  <div id="loader" class="loader" aria-live="polite" aria-label="Loading portfolio">
+    <div class="loader__matrix" aria-hidden="true"></div>
+    <div class="loader__content">
+      <div class="loader__logo">
+        <span class="loader__logo-bracket">[</span>
+        <span class="loader__logo-text">PRADIP's WORLD</span>
+        <span class="loader__logo-bracket">]</span>
+      </div>
+      <div class="loader__terminal" id="boot-terminal">
+        <div class="loader__terminal-header">
+          <span class="loader__dot loader__dot--red"></span>
+          <span class="loader__dot loader__dot--yellow"></span>
+          <span class="loader__dot loader__dot--green"></span>
+          <span class="loader__terminal-title">system://boot/init</span>
+        </div>
+        <div class="loader__terminal-body" id="boot-logs"></div>
+      </div>
+      <div class="loader__progress">
+        <div class="loader__progress-bar" id="loader-progress"></div>
+        <span class="loader__progress-text" id="loader-percent">0%</span>
+      </div>
+      <p class="loader__status" id="loader-status">Initializing system...</p>
+    </div>
+  </div>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__pulse" id="cursor-pulse"></div>
+    <div class="cursor__rocket">
+      <svg class="cursor__rocket-svg" viewBox="0 0 24 36" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path class="cursor__rocket-fin cursor__rocket-fin--left" d="M4 24 L1 34 L8 28 Z"/>
+        <path class="cursor__rocket-fin cursor__rocket-fin--right" d="M20 24 L23 34 L16 28 Z"/>
+        <path class="cursor__rocket-hull" d="M12 2 C12 2 6 14 6 26 L18 26 C18 14 12 2 12 2 Z"/>
+        <circle class="cursor__rocket-window" cx="12" cy="16" r="2.8"/>
+        <path class="cursor__rocket-stripe" d="M8 22 H16"/>
+        <ellipse class="cursor__rocket-flame cursor__rocket-flame--outer" cx="12" cy="31" rx="5" ry="7"/>
+        <ellipse class="cursor__rocket-flame cursor__rocket-flame--inner" cx="12" cy="30" rx="2.5" ry="4.5"/>
+      </svg>
+    </div>
+    <div class="cursor__hand" aria-hidden="true">
+      <svg class="cursor__hand-svg" viewBox="0 0 32 36" xmlns="http://www.w3.org/2000/svg">
+        <path class="cursor__hand-shape" d="M10 34V18.5L7.5 16.5V12.5C7.5 11.4 8.4 10.5 9.5 10.5C10.4 10.5 11.1 11.1 11.3 12L11.5 14V8.5C11.5 7.4 12.4 6.5 13.5 6.5C14.6 6.5 15.5 7.4 15.5 8.5V13L15.7 8.8C15.9 7.7 16.8 7 17.8 7C18.9 7 19.8 7.9 19.8 9V15.5L20 11.8C20.1 10.7 21 10 22 10C23.1 10 24 10.9 24 12V20.5C24 27.5 19 34 12.5 34H10Z"/>
+        <path class="cursor__hand-highlight" d="M12 32V20L14 18V14"/>
+      </svg>
+    </div>
+    <div class="cursor__text" aria-hidden="true">
+      <span class="cursor__text-cap cursor__text-cap--top"></span>
+      <span class="cursor__text-line"></span>
+      <span class="cursor__text-cap cursor__text-cap--bottom"></span>
+    </div>
+  </div>
+  <canvas id="cursor-trail" class="cursor-trail" aria-hidden="true"></canvas>
+
+  <!-- Three.js Galaxy Background -->
+  <canvas id="galaxy-canvas" class="galaxy-canvas" aria-hidden="true"></canvas>
+
+  <!-- Navigation -->
+  <header class="nav" id="nav">
+    <nav class="nav__container" aria-label="Main navigation">
+      <a href="#home" class="nav__logo" data-magnetic>
+        <span class="nav__logo-icon">◈</span>
+        <span class="nav__logo-text"><span class="nav__logo-accent">PRADIP</span></span>
+      </a>
+      <button class="nav__toggle" id="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav__links" id="nav-links">
+        <li><a href="#home" class="nav__link active" data-section="home">Home</a></li>
+        <li><a href="#about" class="nav__link" data-section="about">About</a></li>
+        <li><a href="#resume" class="nav__link" data-section="resume">Resume</a></li>
+        <li><a href="#portfolio" class="nav__link" data-section="portfolio">Portfolio</a></li>
+        <li><a href="#contact" class="nav__link" data-section="contact">Contact</a></li>
+      </ul>
+      <div class="nav__actions">
+        <button class="nav__action-btn" id="cmd-palette-btn" title="Command Palette (Ctrl+K)" aria-label="Open command palette">
+          <span>⌘K</span>
+        </button>
+        <button class="nav__action-btn" id="terminal-toggle" title="Terminal Mode" aria-label="Toggle terminal">
+          <span>&gt;_</span>
+        </button>
+      </div>
+    </nav>
+    <div class="nav__indicator" id="nav-indicator"></div>
+  </header>
+
+  <main id="main-content">
+    <!-- HOME -->
+    <section id="home" class="section section--hero" aria-label="Home">
+      <div class="hero">
+        <div class="hero__planet" aria-hidden="true">
+          <div class="hero__planet-ring"></div>
+          <div class="hero__planet-body"></div>
+        </div>
+        <div class="hero__avatar">
+          <div class="hero__profile-wrap">
+            <div class="hero__profile-ring" aria-hidden="true"></div>
+            <video
+              id="hero-profile-video"
+              class="hero__profile-media"
+              autoplay
+              muted
+              playsinline
+              webkit-playsinline
+              preload="auto"
+              aria-label="Developer profile video"
+            >
+              <source src="assets/images/profile.mp4" type="video/mp4">
+            </video>
+            <img
+              src="assets/images/profile.jpg"
+              alt="Full Stack Developer profile photo"
+              class="hero__profile-media hero__profile-media--fallback hero__profile-media--hidden"
+              id="hero-profile-fallback"
+              width="320"
+              height="320"
+              hidden
+            >
+            <canvas id="avatar-canvas" class="hero__profile-fallback" aria-hidden="true"></canvas>
+          </div>
+        </div>
+        <div class="hero__content">
+          <p class="hero__greeting reveal-text">// SYSTEM ONLINE — ACCESS GRANTED — ENTER MY DIGITAL UNIVERSE</p>
+          <h1 class="hero__title">
+            <span class="hero__name" id="hero-name">
+              <span class="hero__name-line">PRADIP KUMAR</span>
+              <span class="hero__name-line hero__name-line--accent">PRAJAPATI</span>
+            </span>
+          </h1>
+          <div class="hero__typing">
+            <span class="hero__typing-label">&gt;</span>
+            <span id="typing-text" class="hero__typing-text"></span>
+            <span class="hero__cursor-blink">|</span>
+          </div>
+          <p class="hero__tagline holographic-text">BUILDING MODERN WEB APPLICATIONS</p>
+          <div class="hero__buttons">
+            <a href="#portfolio" class="btn btn--primary" data-magnetic>
+              <span class="btn__glow"></span>
+              <span class="btn__text">Explore My World</span>
+              <span class="btn__icon">→</span>
+            </a>
+            <a href="#resume" class="btn btn--secondary" data-magnetic>
+              <span class="btn__text">View Resume</span>
+              <span class="btn__icon">↓</span>
+            </a>
+          </div>
+          <div class="hero__stats">
+            <div class="stat" data-count="3">
+              <span class="stat__number">0</span>
+              <span class="stat__label">Years Experience</span>
+            </div>
+            <div class="stat" data-count="7">
+              <span class="stat__number">0</span>
+              <span class="stat__label">Projects Completed</span>
+            </div>
+            <div class="stat" data-count="22">
+              <span class="stat__number">0</span>
+              <span class="stat__label">Technologies Mastered</span>
+            </div>
+          </div>
+        </div>
+        <div class="hero__tech-orbit" aria-hidden="true">
+          <div class="tech-icon" data-tech="HTML5"><img src="assets/logo/html5.png" alt="HTML5 logo"></div>
+          <div class="tech-icon" data-tech="CSS3"><img src="assets/logo/css3.png" alt="CSS3 logo"></div>
+          <div class="tech-icon" data-tech="JavaScript"><img src="assets/logo/javascript.png" alt="JavaScript logo"></div>
+          <div class="tech-icon" data-tech="Python"><img src="assets/logo/python.png" alt="Python logo"></div>
+          <div class="tech-icon" data-tech="Node.js"><img src="assets/logo/nodejs.png" alt="Node.js logo"></div>
+          <div class="tech-icon" data-tech="Express.js"><img src="assets/logo/express.png" alt="Express.js logo"></div>
+          <div class="tech-icon" data-tech="PostgreSQL"><img src="assets/logo/postgresql.png" alt="PostgreSQL logo"></div>
+          <div class="tech-icon" data-tech="Docker"><img src="assets/logo/docker.png" alt="Docker logo"></div>
+        </div>
+        <div class="hero__scroll-indicator" aria-hidden="true">
+          <span>Scroll to explore</span>
+          <div class="hero__scroll-line"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section section--about" aria-label="About">
+      <div class="container">
+        <header class="section__header">
+          <span class="section__tag">// ABOUT.ME</span>
+          <h2 class="section__title">The Developer Journey</h2>
+          <p class="section__subtitle">From code to cosmos — crafting the future one line at a time</p>
+        </header>
+        <div class="about__grid">
+          <div class="about__story glass-card">
+            <h3 class="about__story-title">Mission</h3>
+            <p>To build reliable, modern web applications that deliver great user experiences — combining clean frontend craft with solid backend engineering.</p>
+          </div>
+          <div class="about__story glass-card">
+            <h3 class="about__story-title">Vision</h3>
+            <p>A world where every interface feels alive — responsive, intuitive, and beautiful. Where developers craft digital experiences that solve real problems.</p>
+          </div>
+          <div class="about__story glass-card">
+            <h3 class="about__story-title">Passion</h3>
+            <p>Exploring the digital universe through code. I combine creativity, engineering, and modern web technologies to build immersive experiences, scalable applications, and innovative solutions that leave a lasting impact.</p>
+          </div>
+        </div>
+        <div class="timeline" id="timeline">
+          <div class="timeline__line" aria-hidden="true"></div>
+          <div class="timeline__item" data-year="2021">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content glass-card">
+              <span class="timeline__year">2021</span>
+              <h4>Beginning the Coding Journey</h4>
+              <p>Started learning programming independently with C language.
+                Built a strong foundation in programming logic, problem-solving,
+                and computer fundamentals.</p>
+            </div>
+          </div>
+          <div class="timeline__item" data-year="2023">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content glass-card">
+              <span class="timeline__year">2022</span>
+              <h4>University & Programming Fundamentals</h4>
+              <p>Joined KIIT University and expanded programming knowledge through
+                academic coursework, studying C, Java, Object-Oriented Programming,
+                and core computer science concepts.</p>
+            </div>
+          </div>
+          <div class="timeline__item" data-year="2024">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content glass-card">
+              <span class="timeline__year">2023</span>
+              <h4>Data Structures & Problem Solving</h4>
+              <p>Learned Python and focused on Data Structures and Algorithms,
+                machine learning, data analysis, and Jupyter Notebook workflows —
+                improving analytical thinking, coding efficiency, and
+                problem-solving skills.</p>
+            </div>
+          </div>
+          <div class="timeline__item" data-year="2025">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content glass-card">
+              <span class="timeline__year">2024</span>
+              <h4>Frontend Development</h4>
+              <p>Entered web development by learning HTML5, CSS3, and JavaScript (ES6+).
+                Built responsive websites, interactive user interfaces with Vue.js, and
+                strengthened frontend development skills.</p>
+            </div>
+          </div>
+          <div class="timeline__item" data-year="2025">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content glass-card">
+              <span class="timeline__year">2025</span>
+              <h4>Backend & Database Development</h4>
+              <p>
+                Expanded into full-stack development with Node.js, Express.js, Vue.js,
+                PostgreSQL, SQL, Git, GitHub, Docker, AWS Cloud, Ubuntu, Postman, and PyCharm.
+                Developed complete web applications with REST APIs and modern development workflows.
+              </p>
+            </div>
+          </div>
+          <div class="timeline__item" data-year="2025">
+            <div class="timeline__dot"></div>
+            <div class="timeline__content glass-card">
+              <span class="timeline__year">2026</span>
+              <h4>Full Stack Developer Internship</h4>
+              <p>
+                Joined company as a Full Stack Developer Intern. Contributed to
+                enterprise-level applications, worked with real-world development
+                practices, and helped build the EMS Asset Management System while
+                gaining hands-on industry experience.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="constellation" id="skill-constellation">
+          <h3 class="constellation__title">Skill Constellation</h3>
+          <canvas id="constellation-canvas" class="constellation__canvas"></canvas>
+        </div>
+        <div class="achievements">
+          <div class="achievement glass-card">
+            <span class="achievement__icon">🏆</span>
+            <span class="achievement__number" data-count="5" data-suffix="+">0</span>
+            <span class="achievement__label">Projects Built</span>
+          </div>
+          <div class="achievement glass-card">
+            <span class="achievement__icon">💻</span>
+            <span class="achievement__number" data-count="3" data-suffix="+">0</span>
+            <span class="achievement__label">Years Learning & Building</span>
+          </div>
+          <div class="achievement glass-card">
+            <span class="achievement__icon">🚀</span>
+            <span class="achievement__number achievement__number--static">FS</span>
+            <span class="achievement__label">Full Stack Developer Intern</span>
+          </div>
+          <div class="achievement glass-card">
+            <span class="achievement__icon">🐙</span>
+            <span class="achievement__number achievement__number--static">OSS</span>
+            <span class="achievement__label">Open Source Enthusiast</span>
+          </div>
+        </div>
+        <div class="support-journey glass-card" id="support-journey">
+          <div class="support-journey__particles" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <div class="support-journey__glow" aria-hidden="true"></div>
+          <div class="support-journey__content">
+            <span class="section__tag">// SUPPORT.SIGNAL</span>
+            <h3 class="support-journey__title">Support My Journey</h3>
+            <div class="support-journey__text">
+              <p>I'm a Full Stack Developer passionate about building useful web applications and learning new technologies.</p>
+              <p>Your support helps me continue creating projects, contributing to open source, and growing as a developer.</p>
+              <p class="support-journey__highlight">Every chai fuels the next feature ☕🚀</p>
+            </div>
+            <button type="button" class="btn btn--primary support-journey__btn" id="chai-open-btn" aria-haspopup="dialog">
+              <span class="btn__glow"></span>
+              <span class="btn__text">Buy Me A Chai ☕</span>
+            </button>
+          </div>
+        </div>
+        <div class="code-snippets" aria-hidden="true">
+          <pre class="code-snippet"><code>const app = express();</code></pre>
+          <pre class="code-snippet"><code>export default Developer;</code></pre>
+          <pre class="code-snippet"><code>while(learning) { build(); ship(); }</code></pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- RESUME -->
+    <section id="resume" class="section section--resume" aria-label="Resume">
+      <div class="container">
+        <header class="section__header">
+          <span class="section__tag">// RESUME.DAT</span>
+          <h2 class="section__title">Command Center</h2>
+          <p class="section__subtitle">Professional credentials & experience matrix</p>
+        </header>
+        <div class="resume__controls">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="experience">Experience</button>
+          <button class="filter-btn" data-filter="education">Education</button>
+          <button class="filter-btn" data-filter="certifications">Certifications</button>
+        </div>
+        <div class="resume__grid">
+          <div class="resume__column">
+            <h3 class="resume__column-title">Experience</h3>
+            <div class="resume__items" data-category="experience">
+              <article class="resume__item glass-card" data-type="experience">
+                <div class="resume__item-header">
+                  <span class="resume__item-date">June 2026 — Present</span>
+                  <span class="resume__item-badge">Current</span>
+                </div>
+                <h4>Full Stack Developer Intern</h4>
+                <p class="resume__item-company">ESAB India Limited</p>
+                <p>Building and maintaining web applications using HTML5, CSS3, JavaScript, Vue.js, Node.js, Express.js, PostgreSQL, REST APIs, Postman, and AWS Cloud.</p>
+              </article>
+              <article class="resume__item glass-card" data-type="experience">
+                <div class="resume__item-header">
+                  <span class="resume__item-date">Jan 2025 — Feb 2025</span>
+                </div>
+                <h4>Machine Learning Intern</h4>
+                <p class="resume__item-company">CodTech IT Solutions</p>
+                <p>Developed machine learning models and web applications using Python, scikit-learn, and TensorFlow.</p>
+              </article>
+            </div>
+          </div>
+          <div class="resume__column">
+            <h3 class="resume__column-title">Education</h3>
+            <div class="resume__items" data-category="education">
+              <article class="resume__item glass-card" data-type="education">
+                <div class="resume__item-header">
+                  <span class="resume__item-date">2022 — 2026</span>
+                </div>
+                <h4>B.Tech in Computer Science and Engineering</h4>
+                <div class="resume__item-meta">
+                  <span class="resume__item-company">KIIT University</span>
+                  <span class="resume__item-location">Odisha, India</span>
+                </div>
+                <p>Focused on academic learning, software development, web technologies, database systems, Python, and data analysis. CGPA: 8.36</p>
+              </article>
+              <article class="resume__item glass-card" data-type="education">
+                <div class="resume__item-header">
+                  <span class="resume__item-date">2019 — 2021</span>
+                </div>
+                <h4>+2, Science</h4>
+                <div class="resume__item-meta">
+                  <span class="resume__item-company">Sai Global College & School</span>
+                  <span class="resume__item-location">Bhairahawa, Nepal</span>
+                </div>
+                <p>Focused on academic learning in Physics, Chemistry, Mathematics, English, etc.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div class="resume__certifications">
+          <h3 class="resume__column-title resume__column-title--center">Certifications</h3>
+          <div class="resume__items resume__items--cert-grid" data-category="certifications">
+            <article class="resume__item glass-card resume__item--cert" data-type="certifications">
+              <h4>Tutedude Python</h4>
+              <p class="resume__item-company">Online Learning — 2026</p>
+            </article>
+            <article class="resume__item glass-card resume__item--cert" data-type="certifications">
+              <h4>Data Science, SQL & Python</h4>
+              <p class="resume__item-company">Online Learning — 2025</p>
+            </article>
+            <article class="resume__item glass-card resume__item--cert" data-type="certifications">
+              <h4>Python, Machine Learning & Data Analysis</h4>
+              <p class="resume__item-company">Online Learning — 2025</p>
+            </article>
+            <article class="resume__item glass-card resume__item--cert" data-type="certifications">
+              <h4>Internship Common Aptitude Test</h4>
+              <p class="resume__item-company">Online Learning — 2025</p>
+            </article>
+          </div>
+        </div>
+        <div class="skills-radar glass-card">
+          <h3 class="skills-radar__title">Skills Radar</h3>
+          <canvas id="radar-canvas" width="400" height="400"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS -->
+    <section id="skills" class="section section--skills" aria-label="Skills">
+      <div class="container">
+        <header class="section__header">
+          <span class="section__tag">// SKILLS.MATRIX</span>
+          <h2 class="section__title">Holographic Skill Matrix</h2>
+          <p class="section__subtitle">Technologies mastered across the digital spectrum</p>
+        </header>
+        <div class="skills__categories">
+          <button class="skills__cat-btn active" data-category="all">All</button>
+          <button class="skills__cat-btn" data-category="frontend">Frontend</button>
+          <button class="skills__cat-btn" data-category="backend">Backend</button>
+          <button class="skills__cat-btn" data-category="database">Database</button>
+          <button class="skills__cat-btn" data-category="devops">DevOps</button>
+          <button class="skills__cat-btn" data-category="tools">Tools</button>
+          <button class="skills__cat-btn" data-category="data">Data & AI</button>
+        </div>
+        <div class="skills__grid" id="skills-grid"></div>
+        <div class="skills__network" id="skills-network">
+          <canvas id="skills-network-canvas"></canvas>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="section section--portfolio" aria-label="Portfolio">
+      <div class="container">
+        <header class="section__header">
+          <span class="section__tag">// PROJECTS.STATION</span>
+          <h2 class="section__title">Space Station Showcase</h2>
+          <p class="section__subtitle">Projects orbiting in the digital universe</p>
+        </header>
+        <div class="portfolio__filters">
+          <button class="filter-btn active" data-filter="major">Major Projects (Client & Self Project)</button>
+        </div>
+        <div class="portfolio__grid" id="portfolio-grid"></div>
+        <div class="portfolio__cta">
+          <a href="https://github.com/pradipNP" class="btn btn--primary portfolio__github-btn portfolio__github-btn--wide" target="_blank" rel="noopener noreferrer" data-magnetic>
+            For more mini projects including ML, AI, and my journey notes — visit my GitHub →
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="section section--contact" aria-label="Contact">
+      <div class="container">
+        <header class="section__header">
+          <span class="section__tag">// COMM.HUB</span>
+          <h2 class="section__title">Communication Hub</h2>
+          <p class="section__subtitle">Establish connection — let's build something extraordinary</p>
+        </header>
+        <div class="contact__grid">
+          <form class="contact__form glass-card" id="contact-form" novalidate>
+            <div class="form-group">
+              <label for="contact-name">Name</label>
+              <input type="text" id="contact-name" name="name" required autocomplete="name">
+              <span class="form-error" id="name-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="contact-email">Email</label>
+              <input type="email" id="contact-email" name="email" required autocomplete="email">
+              <span class="form-error" id="email-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="contact-subject">Subject</label>
+              <input type="text" id="contact-subject" name="subject" required>
+              <span class="form-error" id="subject-error"></span>
+            </div>
+            <div class="form-group">
+              <label for="contact-message">Message</label>
+              <textarea id="contact-message" name="message" rows="5" required></textarea>
+              <span class="form-error" id="message-error"></span>
+            </div>
+            <div class="form-group form-group--honeypot" aria-hidden="true">
+              <input type="text" id="contact-honey" name="_honey" tabindex="-1" autocomplete="off">
+            </div>
+            <button type="submit" class="btn btn--primary btn--full" data-magnetic>
+              <span class="btn__glow"></span>
+              <span class="btn__text">Transmit Message</span>
+              <span class="btn__icon">📡</span>
+            </button>
+            <p class="form-status" id="contact-form-status" role="status" aria-live="polite" hidden></p>
+          </form>
+          <div class="contact__info">
+            <div class="contact__globe glass-card">
+              <canvas id="globe-canvas"></canvas>
+            </div>
+            <div class="contact__socials">
+              <a href="https://github.com/pradipNP" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12"/></svg>
+              </a>
+              <a href="https://www.linkedin.com/in/pradipkprajapati" class="social-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 114.128 0 2.063 2.063 0 01-2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+              <a href="mailto:pradipkprajapati27@gmail.com" class="social-link" aria-label="Email">
+                <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+              </a>
+            </div>
+            <div class="contact__details glass-card">
+              <p><strong>Location:</strong> Nepal</p>
+              <p><strong>Status:</strong> <span class="status-online">● Online & Available</span></p>
+              <p><strong>Response:</strong> Within 24 hours</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="footer__copy">&copy; 2026 Pradip Kumar Prajapati.<br>
+        From Curiosity to Code — Continuously Learning, Building, and Growing.</p>
+      <p class="footer__easter-egg">Try <kbd>Ctrl</kbd>+<kbd>K</kbd> or the Konami code ↑↑↓↓←→←→BA</p>
+    </div>
+  </footer>
+
+  <div class="modal" id="project-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+    <div class="modal__backdrop"></div>
+    <div class="modal__content glass-card">
+      <button class="modal__close" aria-label="Close modal">&times;</button>
+      <div class="modal__body" id="modal-body"></div>
+    </div>
+  </div>
+
+  <div class="chai-modal" id="chai-modal" role="dialog" aria-modal="true" aria-labelledby="chai-modal-title" hidden>
+    <div class="chai-modal__backdrop"></div>
+    <div class="chai-modal__panel">
+      <div class="chai-modal__border" aria-hidden="true"></div>
+      <button type="button" class="chai-modal__close" id="chai-modal-close" aria-label="Close payment terminal">&times;</button>
+      <header class="chai-modal__header">
+        <span class="chai-modal__tag">// PAYMENT.TERMINAL</span>
+        <h2 class="chai-modal__title" id="chai-modal-title">☕ Fuel My Next Project</h2>
+        <p class="chai-modal__subtitle">
+          Your support helps me continue building projects, learning new technologies,
+          and contributing to open source.
+        </p>
+      </header>
+      <div class="chai-modal__tiers" role="group" aria-label="Support amount options">
+        <button type="button" class="chai-tier" data-amount="30">
+          <span class="chai-tier__icon">☕</span>
+          <span class="chai-tier__name">One Chai</span>
+          <span class="chai-tier__price">₹30</span>
+        </button>
+        <button type="button" class="chai-tier" data-amount="50">
+          <span class="chai-tier__icon">☕☕</span>
+          <span class="chai-tier__name">Two Chai</span>
+          <span class="chai-tier__price">₹50</span>
+        </button>
+        <button type="button" class="chai-tier chai-tier--featured" data-amount="100">
+          <span class="chai-tier__icon">☕☕☕</span>
+          <span class="chai-tier__name">Premium Chai</span>
+          <span class="chai-tier__price">₹100</span>
+        </button>
+      </div>
+      <div class="chai-modal__custom">
+        <label class="chai-modal__custom-label" for="chai-custom-amount">Custom Amount</label>
+        <div class="chai-modal__custom-row">
+          <span class="chai-modal__currency">₹</span>
+          <input type="number" id="chai-custom-amount" class="chai-modal__custom-input" min="1" max="100000" step="1" placeholder="Enter amount">
+        </div>
+      </div>
+      <div class="chai-modal__terminal glass-card" id="chai-payment-terminal">
+        <div class="chai-modal__terminal-header">
+          <span class="chai-modal__terminal-dot"></span>
+          <span class="chai-modal__terminal-dot chai-modal__terminal-dot--magenta"></span>
+          <span class="chai-modal__terminal-dot chai-modal__terminal-dot--green"></span>
+          <span class="chai-modal__terminal-label">UPI // SCAN TO PAY</span>
+        </div>
+        <div class="chai-modal__qr-wrap">
+          <div class="chai-modal__qr-frame" id="chai-qr-frame">
+            <canvas id="chai-qr-canvas" class="chai-modal__qr-canvas" width="200" height="200" aria-label="Dynamic UPI payment QR code"></canvas>
+            <p class="chai-modal__qr-error" id="chai-qr-error" hidden role="alert">Unable to generate QR code</p>
+            <div class="chai-modal__qr-scanline" aria-hidden="true"></div>
+          </div>
+          <div class="chai-modal__payment-details">
+            <div class="chai-modal__detail">
+              <span class="chai-modal__detail-label">UPI ID</span>
+              <div class="chai-modal__detail-row">
+                <span class="chai-modal__detail-value" id="chai-upi-id">your-upi-id@bank</span>
+                <button type="button" class="chai-modal__copy-btn" id="chai-copy-upi">Copy</button>
+              </div>
+            </div>
+            <div class="chai-modal__detail">
+              <span class="chai-modal__detail-label">Receiver</span>
+              <span class="chai-modal__detail-value" id="chai-receiver-name">Pradip Kumar Prajapati</span>
+            </div>
+            <div class="chai-modal__detail">
+              <span class="chai-modal__detail-label">Amount</span>
+              <span class="chai-modal__detail-value chai-modal__detail-value--amount" id="chai-selected-amount">₹100</span>
+            </div>
+            <div class="chai-modal__apps">
+              <span class="chai-modal__detail-label">Scan with</span>
+              <div class="chai-modal__app-tags">
+                <span>Google Pay</span>
+                <span>PhonePe</span>
+                <span>Paytm</span>
+                <span>BHIM</span>
+              </div>
+            </div>
+            <p class="chai-modal__instructions">
+              Select an amount above. The QR code updates instantly with your chosen amount — scan with any UPI app to pay.
+            </p>
+          </div>
+        </div>
+        <div class="chai-modal__copy-success" id="chai-copy-success" hidden aria-live="polite">
+          <span>✓ UPI ID copied to clipboard</span>
+        </div>
+      </div>
+
+      <details class="chai-modal__after-payment">
+        <summary class="chai-modal__after-summary">After Payment ❤️</summary>
+        <div class="chai-modal__after-content">
+          <p class="chai-modal__after-lead">Thank you for supporting my journey!</p>
+          <p>If you'd like, send me a screenshot through:</p>
+          <ul class="chai-modal__after-links">
+            <li>📧 Email</li>
+            <li>💼 LinkedIn</li>
+            <li>🐙 GitHub</li>
+          </ul>
+          <p>Your support helps me continue building projects and learning new technologies.</p>
+          <div class="chai-modal__after-actions">
+            <a href="#" class="chai-modal__after-btn" id="chai-after-email" target="_blank" rel="noopener noreferrer">Email</a>
+            <button type="button" class="chai-modal__after-btn" id="chai-copy-email">Copy Email</button>
+            <a href="#" class="chai-modal__after-btn" id="chai-after-linkedin" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+            <a href="#" class="chai-modal__after-btn" id="chai-after-github" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </div>
+          <div class="chai-modal__copy-success chai-modal__copy-success--inline" id="chai-email-copy-success" hidden aria-live="polite">
+            <span>✓ Email copied to clipboard</span>
+          </div>
+        </div>
+      </details>
+
+      <div class="chai-modal__social">
+        <h3 class="chai-modal__social-title">Support me in other ways</h3>
+        <div class="chai-modal__social-grid">
+          <a href="#" class="chai-social-card" id="chai-github-star" target="_blank" rel="noopener noreferrer">
+            <span class="chai-social-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.11.78-.25.78-.56 0-.28-.01-1.02-.02-2-2.84.62-3.44-.68-3.44-.68-.46-1.16-1.14-1.47-1.14-1.47-.93-.64.07-.63.07-.63 1.03.07 1.57 1.06 1.57 1.06.91 1.57 2.39 1.12 2.97.86.09-.67.36-1.12.65-1.38-2.27-.26-4.66-1.14-4.66-5.07 0-1.12.4-2.03 1.06-2.75-.11-.26-.46-1.3.1-2.71 0 0 .86-.28 2.82 1.05A9.78 9.78 0 0112 5.93c.87.004 1.74.12 2.56.35 1.96-1.33 2.82-1.05 2.82-1.05.56 1.41.21 2.45.1 2.71.66.72 1.06 1.63 1.06 2.75 0 3.94-2.4 4.81-4.68 5.07.37.32.7.94.7 1.9 0 1.37-.01 2.47-.01 2.8 0 .31.21.68.79.56A10.51 10.51 0 0023.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            </span>
+            <span class="chai-social-card__label">⭐ Star my repositories</span>
+          </a>
+          <a href="#" class="chai-social-card" id="chai-github-follow" target="_blank" rel="noopener noreferrer">
+            <span class="chai-social-card__icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.65.5.5 5.65.5 12c0 5.08 3.29 9.39 7.86 10.91.57.11.78-.25.78-.56 0-.28-.01-1.02-.02-2-2.84.62-3.44-.68-3.44-.68-.46-1.16-1.14-1.47-1.14-1.47-.93-.64.07-.63.07-.63 1.03.07 1.57 1.06 1.57 1.06.91 1.57 2.39 1.12 2.97.86.09-.67.36-1.12.65-1.38-2.27-.26-4.66-1.14-4.66-5.07 0-1.12.4-2.03 1.06-2.75-.11-.26-.46-1.3.1-2.71 0 0 .86-.28 2.82 1.05A9.78 9.78 0 0112 5.93c.87.004 1.74.12 2.56.35 1.96-1.33 2.82-1.05 2.82-1.05.56 1.41.21 2.45.1 2.71.66.72 1.06 1.63 1.06 2.75 0 3.94-2.4 4.81-4.68 5.07.37.32.7.94.7 1.9 0 1.37-.01 2.47-.01 2.8 0 .31.21.68.79.56A10.51 10.51 0 0023.5 12C23.5 5.65 18.35.5 12 .5z"/></svg>
+            </span>
+            <span class="chai-social-card__label">🔗 Follow me on GitHub</span>
+          </a>
+          <button type="button" class="chai-social-card" id="chai-focus-payment">
+            <span class="chai-social-card__icon chai-social-card__icon--emoji" aria-hidden="true">☕</span>
+            <span class="chai-social-card__label">Buy me a Chai</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cmd-palette" id="cmd-palette" role="dialog" aria-modal="true" aria-label="Command palette" hidden>
+    <div class="cmd-palette__backdrop"></div>
+    <div class="cmd-palette__panel glass-card">
+      <input type="text" class="cmd-palette__input" id="cmd-input" placeholder="Type a command or search..." autocomplete="off">
+      <ul class="cmd-palette__list" id="cmd-list"></ul>
+    </div>
+  </div>
+
+  <div class="terminal" id="terminal" hidden>
+    <div class="terminal__header">
+      <span class="terminal__dot terminal__dot--red"></span>
+      <span class="terminal__dot terminal__dot--yellow"></span>
+      <span class="terminal__dot terminal__dot--green"></span>
+      <span class="terminal__title">dev-os://terminal</span>
+      <button class="terminal__close" id="terminal-close" aria-label="Close terminal">&times;</button>
+    </div>
+    <div class="terminal__body" id="terminal-body">
+      <div class="terminal__output" id="terminal-output"></div>
+      <div class="terminal__input-line">
+        <span class="terminal__prompt">dev@portfolio:~$</span>
+        <input type="text" class="terminal__input" id="terminal-input" autocomplete="off" spellcheck="false">
+      </div>
+    </div>
+  </div>
+
+  <div class="theme-panel" id="theme-panel">
+    <button type="button" class="theme-panel__toggle" id="theme-toggle" aria-label="Customize theme accent" aria-expanded="false" aria-controls="theme-panel-content">🎨</button>
+    <div class="theme-panel__content glass-card" id="theme-panel-content">
+      <h4>Accent Color</h4>
+      <div class="theme-panel__colors">
+        <button type="button" class="theme-color active" data-color="cyan" style="--preview:#00f0ff" aria-label="Cyan accent"></button>
+        <button type="button" class="theme-color" data-color="magenta" style="--preview:#ff00ff" aria-label="Magenta accent"></button>
+        <button type="button" class="theme-color" data-color="green" style="--preview:#00ff88" aria-label="Green accent"></button>
+        <button type="button" class="theme-color" data-color="orange" style="--preview:#ff8800" aria-label="Orange accent"></button>
+        <button type="button" class="theme-color" data-color="purple" style="--preview:#8800ff" aria-label="Purple accent"></button>
+      </div>
+      <label class="theme-panel__music">
+        <input type="checkbox" id="music-toggle">
+        <span>Ambient Sound</span>
+      </label>
+    </div>
+  </div>
+
+  <audio id="ambient-audio" loop preload="none"></audio>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcode/build/qrcode.min.js"></script>
+  <script src="js/particles.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script src="js/terminal.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
