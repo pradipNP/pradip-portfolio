@@ -11,12 +11,66 @@
 
   .hero__avatar {
     min-height: 240px;
-    order: -1;
+    order: -2;
+    margin-bottom: 0;
   }
 
   .hero__profile-wrap {
     width: 220px;
     height: 220px;
+  }
+
+  .hero__tech-orbit {
+    order: -1;
+    position: relative;
+    width: min(100%, 280px);
+    height: 280px;
+    left: auto;
+    bottom: auto;
+    transform: none;
+    margin: 12px auto 24px;
+    margin-left: auto;
+    display: block;
+    flex-wrap: nowrap;
+  }
+
+  .hero__tech-orbit .tech-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 42px;
+    height: 42px;
+    margin: -21px 0 0 -21px;
+    --orbit-radius: 128px;
+    --orbit-angle: 0deg;
+    transform: rotate(var(--orbit-angle)) translateY(calc(-1 * var(--orbit-radius))) rotate(calc(-1 * var(--orbit-angle)));
+    animation: techOrbitPulse 3s ease-in-out infinite;
+  }
+
+  .hero__tech-orbit .tech-icon img {
+    width: 22px;
+    height: 22px;
+  }
+
+  .hero__tech-orbit .tech-icon:nth-child(1) { --orbit-angle: 0deg; animation-delay: 0s; }
+  .hero__tech-orbit .tech-icon:nth-child(2) { --orbit-angle: 45deg; animation-delay: 0.35s; }
+  .hero__tech-orbit .tech-icon:nth-child(3) { --orbit-angle: 90deg; animation-delay: 0.7s; }
+  .hero__tech-orbit .tech-icon:nth-child(4) { --orbit-angle: 135deg; animation-delay: 1.05s; }
+  .hero__tech-orbit .tech-icon:nth-child(5) { --orbit-angle: 180deg; animation-delay: 1.4s; }
+  .hero__tech-orbit .tech-icon:nth-child(6) { --orbit-angle: 225deg; animation-delay: 1.75s; }
+  .hero__tech-orbit .tech-icon:nth-child(7) { --orbit-angle: 270deg; animation-delay: 2.1s; }
+  .hero__tech-orbit .tech-icon:nth-child(8) { --orbit-angle: 315deg; animation-delay: 2.45s; }
+
+  .hero__profile-wrap {
+    animation: none;
+  }
+
+  .section--hero {
+    overflow: hidden;
+  }
+
+  .hero {
+    overflow: hidden;
   }
 
   .hero__name-line {
@@ -142,11 +196,15 @@
   }
 
   .hero__tech-orbit {
-    width: 100%;
-    flex-wrap: wrap;
     position: relative;
+    width: min(100%, 280px);
+    height: 280px;
+    left: auto;
     bottom: auto;
-    margin-top: 32px;
+    transform: none;
+    margin: 12px auto 24px;
+    margin-left: auto;
+    display: block;
   }
 
   .hero__scroll-indicator {
@@ -234,6 +292,23 @@
     gap: 16px;
   }
 
+  .hero__tech-orbit {
+    width: min(100%, 240px);
+    height: 240px;
+  }
+
+  .hero__tech-orbit .tech-icon {
+    width: 38px;
+    height: 38px;
+    margin: -19px 0 0 -19px;
+    --orbit-radius: 106px;
+  }
+
+  .hero__tech-orbit .tech-icon img {
+    width: 20px;
+    height: 20px;
+  }
+
   .hero__buttons {
     flex-direction: column;
   }
@@ -292,6 +367,15 @@
 
   .btn:hover {
     transform: none;
+  }
+
+  .hero__profile-wrap:hover {
+    transform: none;
+  }
+
+  .tech-icon:hover {
+    box-shadow: none;
+    border-color: var(--border-glass);
   }
 }
 

@@ -1054,6 +1054,14 @@ input, textarea {
 .tech-icon:nth-child(4) { animation-delay: 1.5s; }
 .tech-icon:nth-child(5) { animation-delay: 2s; }
 .tech-icon:nth-child(6) { animation-delay: 2.5s; }
+.tech-icon:nth-child(7) { animation-delay: 3s; }
+.tech-icon:nth-child(8) { animation-delay: 3.5s; }
+
+.tech-icon img {
+  width: 26px;
+  height: 26px;
+  object-fit: contain;
+}
 
 .hero__scroll-indicator {
   position: absolute;
