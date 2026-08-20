@@ -194,6 +194,8 @@ const PortfolioAnimations = (() => {
   }
 
   function initParallax() {
+    if (window.matchMedia('(max-width: 768px)').matches) return;
+
     gsap.to('.hero__planet', {
       scrollTrigger: {
         trigger: '.section--hero',

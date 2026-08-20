@@ -211,36 +211,78 @@
       }
     };
 
-    /** Freeze on last frame after intro plays once */
+    let lastKnownTime = 0;
+
+    /** Freeze on last frame after intro plays once (mobile-safe seek) */
     const freezeOnLastFrame = () => {
       if (!video) return;
 
       video.loop = false;
       video.dataset.finished = 'true';
 
-      if (Number.isFinite(video.duration) && video.duration > 0) {
-        video.currentTime = Math.max(0, video.duration - 0.001);
-      }
+      const resolveTargetTime = () => {
+        if (Number.isFinite(video.duration) && video.duration > 0) {
+          return Math.max(0, video.duration - 0.08);
+        }
+        if (lastKnownTime > 0.1) return lastKnownTime;
+        return null;
+      };
 
-      video.pause();
-      console.log(DBG, 'video finished — frozen on last frame');
+      const holdFrame = () => {
+        video.pause();
+      };
+
+      const seekAndHold = () => {
+        const targetTime = resolveTargetTime();
+        if (targetTime === null) return false;
+
+        if (Math.abs(video.currentTime - targetTime) < 0.05) {
+          holdFrame();
+          return true;
+        }
+
+        const onSeeked = () => {
+          video.removeEventListener('seeked', onSeeked);
+          holdFrame();
+        };
+
+        video.addEventListener('seeked', onSeeked, { once: true });
+
+        try {
+          video.currentTime = targetTime;
+        } catch {
+          video.removeEventListener('seeked', onSeeked);
+          holdFrame();
+        }
+
+        return true;
+      };
+
+      if (!seekAndHold()) {
+        video.addEventListener('loadedmetadata', () => seekAndHold(), { once: true });
+      }
     };
 
     const playVideo = () => {
       if (!video || video.classList.contains('hero__profile-media--hidden')) return;
-      if (video.dataset.finished === 'true') return;
+      if (video.dataset.finished === 'true') {
+        freezeOnLastFrame();
+        return;
+      }
 
       video.loop = false;
       video.muted = true;
       video.defaultMuted = true;
       video.setAttribute('muted', '');
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
       video.playsInline = true;
 
       const playPromise = video.play();
       if (playPromise !== undefined) {
-        playPromise
-          .then(() => console.log(DBG, 'video playing'))
-          .catch((err) => console.warn(DBG, 'play retry needed:', err.message));
+        playPromise.catch(() => {
+          /* iOS may block until user gesture — loader click handler retries */
+        });
       }
     };
 
@@ -254,6 +296,16 @@
     showVideo();
 
     video.addEventListener('ended', freezeOnLastFrame);
+
+    video.addEventListener('timeupdate', () => {
+      if (video.dataset.finished === 'true') return;
+      if (video.currentTime > 0.05) {
+        lastKnownTime = video.currentTime;
+      }
+      if (Number.isFinite(video.duration) && video.duration > 0 && video.currentTime >= video.duration - 0.12) {
+        freezeOnLastFrame();
+      }
+    });
 
     video.addEventListener('loadeddata', () => {
       console.log(DBG, 'video loaded');
@@ -297,14 +349,19 @@
 
     // Restore last frame when returning via browser back/forward cache
     window.addEventListener('pageshow', (event) => {
-      if (event.persisted && video.dataset.finished === 'true') {
+      if (video.dataset.finished === 'true') {
         freezeOnLastFrame();
+      } else if (event.persisted) {
+        playVideo();
       }
     });
 
     document.addEventListener('visibilitychange', () => {
       if (video.classList.contains('hero__profile-media--hidden')) return;
-      if (video.dataset.finished === 'true') return;
+      if (video.dataset.finished === 'true') {
+        freezeOnLastFrame();
+        return;
+      }
       if (document.hidden) video.pause();
       else playVideo();
     });
