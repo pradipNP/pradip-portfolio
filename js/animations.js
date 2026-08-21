@@ -110,18 +110,18 @@ const PortfolioAnimations = (() => {
       });
     });
 
-    gsap.utils.toArray('.project-card').forEach((card, i) => {
-      scrollReveal(card, {
+    const portfolioSection = document.querySelector('#portfolio .portfolio__carousel');
+    if (portfolioSection) {
+      scrollReveal(portfolioSection, {
         opacity: 0,
-        y: 50,
-        duration: 0.65,
-        delay: (i % 3) * 0.12,
-        ease: 'power3.out',
+        y: 28,
+        duration: 0.55,
+        ease: 'power2.out',
       }, {
-        trigger: card,
-        start: 'top 92%',
+        trigger: '#portfolio',
+        start: 'top 85%',
       });
-    });
+    }
 
     gsap.utils.toArray('.skill-orb').forEach((orb, i) => {
       scrollReveal(orb, {

@@ -479,7 +479,18 @@
         <div class="portfolio__filters">
           <button class="filter-btn active" data-filter="major">Major Projects (Client & Self Project)</button>
         </div>
-        <div class="portfolio__grid" id="portfolio-grid"></div>
+        <div class="portfolio__carousel" id="portfolio-carousel">
+          <button type="button" class="portfolio__nav portfolio__nav--prev" id="portfolio-prev" aria-label="Previous projects" disabled>
+            <svg class="portfolio__nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <div class="portfolio__viewport" id="portfolio-viewport">
+            <div class="portfolio__track" id="portfolio-grid"></div>
+          </div>
+          <button type="button" class="portfolio__nav portfolio__nav--next" id="portfolio-next" aria-label="Next projects">
+            <svg class="portfolio__nav-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+        <p class="portfolio__carousel-status" id="portfolio-carousel-status" aria-live="polite"></p>
         <div class="portfolio__cta">
           <a href="https://github.com/pradipNP" class="btn btn--primary portfolio__github-btn portfolio__github-btn--wide" target="_blank" rel="noopener noreferrer" data-magnetic>
             For more mini projects including ML, AI, and my journey notes — visit my GitHub →

@@ -211,8 +211,17 @@
     display: none;
   }
 
-  .portfolio__grid {
-    grid-template-columns: 1fr;
+  .portfolio__carousel {
+    gap: 10px;
+  }
+
+  .portfolio__nav {
+    width: 44px;
+    height: 44px;
+  }
+
+  .portfolio__track {
+    --carousel-gap: 24px;
   }
 
   .skills__grid {
@@ -335,6 +344,15 @@
   .skills__cat-btn {
     padding: 6px 12px;
     font-size: 0.7rem;
+  }
+
+  .portfolio__nav {
+    width: 40px;
+    height: 40px;
+  }
+
+  .portfolio__track {
+    --carousel-gap: 20px;
   }
 
   .project-card__actions {
