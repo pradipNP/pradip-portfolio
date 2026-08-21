@@ -55,15 +55,17 @@ Other:      REST APIs, Machine Learning, Artificial Intelligence, Data Analysis`
       execute: () => `
 > PROJECT DATABASE — MAJOR PROJECTS
 
-[1] Nepal Live Rates — Self Project
-    Live: nepal-live-rates.pages.dev
-[2] Shova Creation Photography — Client Project
+[1] Shova Creation Photography — Client Project
     Live: shovacreation.netlify.app
+[2] Nepal Live Rates — Self Project
+    Live: nepal-live-rates.pages.dev
 [3] SAMS Nepal (OpenSAMS) — Self Project
     Live: opensams.pages.dev
-[4] Awaken The Lion — Self Project
-    Live: awaken-the-lion.pages.dev
+[4] KhelZon — Self Project (Browser Arcade PWA)
+    Live: khelzon.pages.dev
 [5] Agent Racchha — Self Project (Windows AI Agent)
+[6] Awaken The Lion — Self Project
+    Live: awaken-the-lion.pages.dev
 
 Mini projects (ML, AI, Vue, Python): github.com/pradipNP
 
