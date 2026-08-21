@@ -73,8 +73,22 @@
   const GITHUB_PROFILE = 'https://github.com/pradipNP';
 
   const PROJECTS = [
+    /* 1 — Client */
     {
       id: 1,
+      title: 'Shova Creation Photography',
+      description: 'Client wedding photography portfolio — hero slider, dynamic gallery, blog, gear showcase, and EmailJS contact.',
+      category: 'major',
+      categoryLabel: 'Client Project',
+      image: 'assets/project/sc.png',
+      stack: ['HTML5', 'CSS3', 'JavaScript', 'EmailJS', 'Netlify', 'Google Maps'],
+      demo: 'https://shovacreation.netlify.app/',
+      github: 'https://github.com/pradipNP/shova-photography-website',
+      details: 'Shova Creation Photography is a hand-coded static portfolio website built for a Nepal-based wedding and event photography business. Features include a full-screen hero slider, portfolio grid with lightbox viewer, dynamic gallery pages (wedding, events, custom categories), blog articles, services and FAQ sections, testimonial and gear carousels, animated stats counters, EmailJS-powered contact form, WhatsApp quick contact, Google Maps embed, and fully responsive layouts — deployed on Netlify.',
+    },
+    /* 2 — Full-stack web */
+    {
+      id: 2,
       title: 'Nepal Live Rates',
       description: 'Real-time Nepal financial and commodity rates — forex, gold, silver, fuel, LPG, and crude oil with charts and calculators.',
       category: 'major',
@@ -85,20 +99,9 @@
       github: 'https://github.com/pradipNP/nepal-live-rates',
       details: 'Nepal Live Rates is a modern web application delivering live financial and commodity market data for Nepal. It tracks forex (Nepal Rastra Bank), gold and silver prices, petrol, diesel, LPG, kerosene, aviation fuel, and global crude oil (WTI & Brent) with interactive charts, 7-day historical trends, unit calculators, area selection, and auto-refresh. Built with a vanilla JavaScript frontend and Node.js/Express backend scraping official sources (NRB, FENEGOSIDA, NOC Nepal), deployed on Cloudflare Pages with the API hosted on Render.',
     },
+    /* 3 — Enterprise full-stack */
     {
-      id: 2,
-      title: 'Shova Creation Photography',
-      description: 'Client wedding photography portfolio for Shova Creation — hero slider, dynamic gallery, blog, gear showcase, and EmailJS contact.',
-      category: 'major',
-      categoryLabel: 'Client Project',
-      image: 'assets/project/sc.png',
-      stack: ['HTML5', 'CSS3', 'JavaScript', 'EmailJS', 'Netlify', 'Google Maps'],
-      demo: 'https://shovacreation.netlify.app/',
-      github: 'https://github.com/pradipNP/shova-photography-website',
-      details: 'Shova Creation Photography is a hand-coded static portfolio website built for a Nepal-based wedding and event photography business. Features include a full-screen hero slider, portfolio grid with lightbox viewer, dynamic gallery pages (wedding, events, custom categories), blog articles, services and FAQ sections, testimonial and gear carousels, animated stats counters, EmailJS-powered contact form, WhatsApp quick contact, Google Maps embed, and fully responsive layouts — deployed on Netlify.',
-    },
-    {
-      id: 4,
+      id: 3,
       title: 'SAMS Nepal (OpenSAMS)',
       description: 'Open-source School Asset Management System — inventory, maintenance, transfers, analytics, RBAC, and QR asset tracking for schools.',
       category: 'major',
@@ -109,20 +112,22 @@
       github: 'https://github.com/pradipNP/opensams',
       details: 'SAMS Nepal (OpenSAMS) is an open-source School Asset Management System for inventory tracking, maintenance workflows, inter-school transfers, dashboard KPIs, and XLSX/PDF reporting. It includes JWT authentication with three RBAC roles (State Administrator, Municipal Officer, School Administrator), scoped inventory across municipalities and schools, and QR asset management. Built with a Vue 3/Vite/Pinia/Tailwind frontend and Node.js/Express/PostgreSQL backend — live at opensams.pages.dev with the API on Render and Neon PostgreSQL.',
     },
+    /* 4 — Browser arcade PWA */
     {
-      id: 5,
-      title: 'Awaken The Lion',
-      description: 'Immersive scroll-driven showcase honouring Lumbini Lions — hero video, GSAP chapters, Lenis smooth scroll, audio, and squad narrative.',
+      id: 4,
+      title: 'KhelZon',
+      description: 'Single-player browser arcade with seven original games, multi-profile scores, light/dark themes, and offline PWA support.',
       category: 'major',
       categoryLabel: 'Self Project',
-      image: 'assets/project/ll.png',
-      stack: ['HTML5', 'CSS3', 'JavaScript', 'GSAP', 'ScrollTrigger', 'Lenis', 'Cloudflare Pages'],
-      demo: 'https://awaken-the-lion.pages.dev/',
-      github: 'https://github.com/pradipNP/lumbini-lions-showcase',
-      details: 'Awaken The Lion is a fan-made immersive static showcase honouring Lumbini Lions and Buddha\'s birthplace — a seven-chapter scroll narrative with full-screen hero video, GSAP ScrollTrigger reveals, Lenis smooth scrolling, contextual lion roar audio, YouTube embeds, interactive squad layout, champions confetti celebration, and a custom cricket-bat cursor on desktop. Built with vanilla HTML, CSS, and JavaScript — deployed on Cloudflare Pages at awaken-the-lion.pages.dev.',
+      image: 'assets/project/kz.png',
+      stack: ['HTML5', 'CSS3', 'JavaScript', 'Canvas 2D', 'LocalStorage', 'Service Worker', 'PWA'],
+      demo: 'https://khelzon.pages.dev/',
+      github: 'https://github.com/pradipNP/khelzon',
+      details: 'KhelZon is a framework-free browser arcade built with vanilla HTML, CSS, and JavaScript ES modules. It includes seven single-player games (Marble Quest Solo, Snake Rush, Number Cascade, Memory Matrix, Orbit Breaker, Star Drift, and Tap Sequence), a welcome lobby with multi-profile player management, per-player localStorage score tracking with JSON export/import, light and dark themes, and a Progressive Web App with service worker offline caching — live at khelzon.pages.dev on Cloudflare Pages.',
     },
+    /* 5 — AI / desktop agent */
     {
-      id: 3,
+      id: 5,
       title: 'Agent Racchha',
       description: 'Open-source Windows computer-use AI agent — natural language desktop control with planning, UI perception, verification, and recovery.',
       category: 'major',
@@ -132,6 +137,19 @@
       demo: 'https://github.com/pradipNP/agent-racchha',
       github: 'https://github.com/pradipNP/agent-racchha',
       details: 'Agent Racchha (Racchha AI) is an open-source Windows computer-use agent that understands natural language, observes the desktop via UI Automation, plans validated typed actions, controls applications, verifies results, and performs bounded recovery on failure. Built with Python/FastAPI backend, React/TypeScript/Electron frontend, Gemini API for structured intent resolution, Chrome DevTools Protocol for browser workflows, and speech input/TTS — following an Understand → Observe → Plan → Act → Verify → Recover architecture with safety allowlists and 300+ automated tests.',
+    },
+    /* 6 — Immersive static showcase */
+    {
+      id: 6,
+      title: 'Awaken The Lion',
+      description: 'Immersive scroll-driven showcase honouring Lumbini Lions — hero video, GSAP chapters, Lenis smooth scroll, audio, and squad narrative.',
+      category: 'major',
+      categoryLabel: 'Self Project',
+      image: 'assets/project/ll.png',
+      stack: ['HTML5', 'CSS3', 'JavaScript', 'GSAP', 'ScrollTrigger', 'Lenis', 'Cloudflare Pages'],
+      demo: 'https://awaken-the-lion.pages.dev/',
+      github: 'https://github.com/pradipNP/lumbini-lions-showcase',
+      details: 'Awaken The Lion is a fan-made immersive static showcase honouring Lumbini Lions and Buddha\'s birthplace — a seven-chapter scroll narrative with full-screen hero video, GSAP ScrollTrigger reveals, Lenis smooth scrolling, contextual lion roar audio, YouTube embeds, interactive squad layout, champions confetti celebration, and a custom cricket-bat cursor on desktop. Built with vanilla HTML, CSS, and JavaScript — deployed on Cloudflare Pages at awaken-the-lion.pages.dev.',
     },
   ];
 
