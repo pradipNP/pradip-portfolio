@@ -98,6 +98,30 @@
       details: 'Shova Creation Photography is a hand-coded static portfolio website built for a Nepal-based wedding and event photography business. Features include a full-screen hero slider, portfolio grid with lightbox viewer, dynamic gallery pages (wedding, events, custom categories), blog articles, services and FAQ sections, testimonial and gear carousels, animated stats counters, EmailJS-powered contact form, WhatsApp quick contact, Google Maps embed, and fully responsive layouts — deployed on Netlify.',
     },
     {
+      id: 4,
+      title: 'SAMS Nepal (OpenSAMS)',
+      description: 'Open-source School Asset Management System — inventory, maintenance, transfers, analytics, RBAC, and QR asset tracking for schools.',
+      category: 'major',
+      categoryLabel: 'Self Project',
+      image: 'assets/project/sams.png',
+      stack: ['Vue 3', 'Vite', 'Pinia', 'Tailwind CSS', 'Node.js', 'Express.js', 'PostgreSQL', 'JWT', 'RBAC'],
+      demo: 'https://opensams.pages.dev/',
+      github: 'https://github.com/pradipNP/opensams',
+      details: 'SAMS Nepal (OpenSAMS) is an open-source School Asset Management System for inventory tracking, maintenance workflows, inter-school transfers, dashboard KPIs, and XLSX/PDF reporting. It includes JWT authentication with three RBAC roles (State Administrator, Municipal Officer, School Administrator), scoped inventory across municipalities and schools, and QR asset management. Built with a Vue 3/Vite/Pinia/Tailwind frontend and Node.js/Express/PostgreSQL backend — live at opensams.pages.dev with the API on Render and Neon PostgreSQL.',
+    },
+    {
+      id: 5,
+      title: 'Awaken The Lion',
+      description: 'Immersive scroll-driven showcase honouring Lumbini Lions — hero video, GSAP chapters, Lenis smooth scroll, audio, and squad narrative.',
+      category: 'major',
+      categoryLabel: 'Self Project',
+      image: 'assets/project/ll.png',
+      stack: ['HTML5', 'CSS3', 'JavaScript', 'GSAP', 'ScrollTrigger', 'Lenis', 'Cloudflare Pages'],
+      demo: 'https://awaken-the-lion.pages.dev/',
+      github: 'https://github.com/pradipNP/lumbini-lions-showcase',
+      details: 'Awaken The Lion is a fan-made immersive static showcase honouring Lumbini Lions and Buddha\'s birthplace — a seven-chapter scroll narrative with full-screen hero video, GSAP ScrollTrigger reveals, Lenis smooth scrolling, contextual lion roar audio, YouTube embeds, interactive squad layout, champions confetti celebration, and a custom cricket-bat cursor on desktop. Built with vanilla HTML, CSS, and JavaScript — deployed on Cloudflare Pages at awaken-the-lion.pages.dev.',
+    },
+    {
       id: 3,
       title: 'Agent Racchha',
       description: 'Open-source Windows computer-use AI agent — natural language desktop control with planning, UI perception, verification, and recovery.',
@@ -437,7 +461,7 @@
     const btnTargets = 'button, .btn, [data-magnetic]';
     const linkTargets = 'a, .nav__link, .social-link';
     const cardTargets = '.project-card, .glass-card, .skill-orb, .hero__profile-wrap';
-    const pointerTargets = 'button, .btn, .nav__link, .social-link, .theme-panel__music, #music-toggle, .modal__close, .modal__actions a, .project-card__btn, .filter-btn, label';
+    const pointerTargets = 'button, .btn, .nav__link, .social-link, .theme-panel__music, #music-toggle, .modal__close, .modal__actions a, .project-card__btn, .filter-btn, .portfolio__nav, label';
     const textTargets = '#contact-name, #contact-email, #contact-subject, #contact-message, #chai-custom-amount';
     const textFieldIds = ['contact-name', 'contact-email', 'contact-subject', 'contact-message'];
     const rocketButtonTargets = '#contact-form button[type="submit"]';
@@ -585,13 +609,121 @@
     renderSkills('all');
   }
 
+  let portfolioCarouselIndex = 0;
+  let portfolioSlideStep = 0;
+  let portfolioResizeTimer = null;
+
+  function getPortfolioCardsPerView() {
+    if (window.innerWidth <= 640) return 1;
+    if (window.innerWidth <= 1024) return 2;
+    return 3;
+  }
+
+  function measurePortfolioSlideStep() {
+    const track = document.getElementById('portfolio-grid');
+    const card = track?.querySelector('.project-card');
+    if (!track || !card) {
+      portfolioSlideStep = 0;
+      return 0;
+    }
+
+    const gap = parseFloat(getComputedStyle(track).gap) || 32;
+    portfolioSlideStep = card.getBoundingClientRect().width + gap;
+    return portfolioSlideStep;
+  }
+
+  function updatePortfolioCarousel({ animate = true } = {}) {
+    const track = document.getElementById('portfolio-grid');
+    const prevBtn = document.getElementById('portfolio-prev');
+    const nextBtn = document.getElementById('portfolio-next');
+    const status = document.getElementById('portfolio-carousel-status');
+    const carousel = document.getElementById('portfolio-carousel');
+    if (!track || !prevBtn || !nextBtn) return;
+
+    const cards = track.querySelectorAll('.project-card');
+    const total = cards.length;
+    const perView = getPortfolioCardsPerView();
+    const maxIndex = Math.max(0, total - perView);
+
+    portfolioCarouselIndex = Math.min(portfolioCarouselIndex, maxIndex);
+
+    if (carousel) {
+      carousel.style.setProperty('--cards-visible', String(perView));
+    }
+
+    if (total <= perView) {
+      track.classList.remove('is-sliding');
+      track.style.transition = 'none';
+      track.style.transform = 'translate3d(0, 0, 0)';
+      prevBtn.disabled = true;
+      nextBtn.disabled = true;
+      carousel?.classList.add('portfolio__carousel--static');
+      if (status) status.textContent = total ? `Showing all ${total} projects` : '';
+      return;
+    }
+
+    carousel?.classList.remove('portfolio__carousel--static');
+    measurePortfolioSlideStep();
+
+    const offset = portfolioCarouselIndex * portfolioSlideStep;
+    track.classList.toggle('is-sliding', animate);
+    track.style.transition = animate ? 'transform 0.42s cubic-bezier(0.25, 0.1, 0.25, 1)' : 'none';
+    track.style.transform = `translate3d(-${offset}px, 0, 0)`;
+
+    if (animate) {
+      const onDone = (event) => {
+        if (event.propertyName !== 'transform') return;
+        track.classList.remove('is-sliding');
+        track.removeEventListener('transitionend', onDone);
+      };
+      track.addEventListener('transitionend', onDone);
+    } else {
+      track.classList.remove('is-sliding');
+    }
+
+    prevBtn.disabled = portfolioCarouselIndex === 0;
+    nextBtn.disabled = portfolioCarouselIndex >= maxIndex;
+
+    if (status) {
+      const start = portfolioCarouselIndex + 1;
+      const end = Math.min(portfolioCarouselIndex + perView, total);
+      status.textContent = `Projects ${start}–${end} of ${total}`;
+    }
+  }
+
+  function initPortfolioCarousel() {
+    const prevBtn = document.getElementById('portfolio-prev');
+    const nextBtn = document.getElementById('portfolio-next');
+    if (!prevBtn || !nextBtn) return;
+
+    prevBtn.addEventListener('click', () => {
+      portfolioCarouselIndex = Math.max(0, portfolioCarouselIndex - 1);
+      updatePortfolioCarousel();
+    });
+
+    nextBtn.addEventListener('click', () => {
+      const track = document.getElementById('portfolio-grid');
+      const total = track?.querySelectorAll('.project-card').length || 0;
+      const maxIndex = Math.max(0, total - getPortfolioCardsPerView());
+      portfolioCarouselIndex = Math.min(maxIndex, portfolioCarouselIndex + 1);
+      updatePortfolioCarousel();
+    });
+
+    window.addEventListener('resize', () => {
+      clearTimeout(portfolioResizeTimer);
+      portfolioResizeTimer = setTimeout(() => updatePortfolioCarousel({ animate: false }), 150);
+    }, { passive: true });
+  }
+
   function initPortfolio() {
     renderProjects('major');
+    initPortfolioCarousel();
 
     document.querySelectorAll('.portfolio__filters .filter-btn').forEach((btn) => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.portfolio__filters .filter-btn').forEach((b) => b.classList.remove('active'));
         btn.classList.add('active');
+        portfolioCarouselIndex = 0;
         renderProjects(btn.dataset.filter);
       });
     });
@@ -612,16 +744,20 @@
       ? PROJECTS
       : PROJECTS.filter((p) => p.category === filter);
 
-    grid.innerHTML = filtered.map((project) => `
+    grid.innerHTML = filtered.map((project) => {
+      const visibleStack = project.stack.slice(0, 5);
+      const extraTags = project.stack.length - visibleStack.length;
+      const stackHtml = visibleStack.map((t) => `<span class="project-card__tag">${t}</span>`).join('')
+        + (extraTags > 0 ? `<span class="project-card__tag project-card__tag--more">+${extraTags}</span>` : '');
+
+      return `
       <article class="project-card" data-id="${project.id}" data-category="${project.category}">
         <div class="project-card__image">${renderProjectImage(project)}</div>
         <div class="project-card__body">
           <span class="project-card__category">${project.categoryLabel || project.category}</span>
           <h3 class="project-card__title">${project.title}</h3>
           <p class="project-card__desc">${project.description}</p>
-          <div class="project-card__stack">
-            ${project.stack.map((t) => `<span class="project-card__tag">${t}</span>`).join('')}
-          </div>
+          <div class="project-card__stack">${stackHtml}</div>
           <div class="project-card__actions">
             <button class="project-card__btn project-card__btn--demo" data-action="demo" data-id="${project.id}">Live Demo</button>
             <button class="project-card__btn project-card__btn--github" data-action="github" data-id="${project.id}">GitHub</button>
@@ -629,7 +765,8 @@
           </div>
         </div>
       </article>
-    `).join('');
+    `;
+    }).join('');
 
     grid.querySelectorAll('[data-action]').forEach((btn) => {
       btn.addEventListener('click', (e) => {
@@ -648,17 +785,7 @@
       });
     });
 
-    if (!window.matchMedia('(hover: none)').matches) {
-      grid.querySelectorAll('.project-card').forEach((card) => {
-        card.addEventListener('mousemove', (e) => {
-          const rect = card.getBoundingClientRect();
-          const x = (e.clientX - rect.left) / rect.width - 0.5;
-          const y = (e.clientY - rect.top) / rect.height - 0.5;
-          card.style.transform = `perspective(1000px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) translateY(-8px)`;
-        });
-        card.addEventListener('mouseleave', () => { card.style.transform = ''; });
-      });
-    }
+    requestAnimationFrame(() => updatePortfolioCarousel({ animate: false }));
   }
 
   function initProjectModal() {
