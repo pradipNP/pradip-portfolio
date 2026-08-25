@@ -21,7 +21,7 @@ A futuristic, cyberpunk-themed developer portfolio built with vanilla **HTML**, 
 - **About** — developer journey timeline
 - **Resume** — experience, education (with location tags), certifications grid, skills radar chart
 - **Skills** — filterable skill orbs + constellation network canvas
-- **Portfolio** — 3 major projects with detail modals and GitHub CTA
+- **Portfolio** — major projects carousel with detail modals and GitHub CTA
 - **Contact** — live email form, social links, interactive **3D globe** (world map + Nepal highlight)
 
 ### Developer experience
@@ -49,13 +49,17 @@ A futuristic, cyberpunk-themed developer portfolio built with vanilla **HTML**, 
 
 ## Featured Projects
 
-| Project | Type | Stack |
-|---------|------|-------|
-| [Nepal Live Rates](https://nepal-live-rates.pages.dev/) | Self Project | HTML, CSS, JS, Node.js, Express, Chart.js |
-| [Shova Creation Photography](https://shovacreation.netlify.app/) | Client Project | HTML, CSS, JS, EmailJS, Netlify |
-| [Agent Racchha](https://github.com/pradipNP/agent-racchha) | Self Project | Python, FastAPI, React, Electron, Gemini API |
+| # | Project | Type | Live | Stack |
+|---|---------|------|------|-------|
+| 1 | [Shova Creation Photography](https://shovacreation.netlify.app/) | Client Project | Live | HTML, CSS, JS, EmailJS, Netlify |
+| 2 | [FERILO](https://ferilo.pages.dev/) | Self Project | Live | React, Vite, Node.js, Express, PostgreSQL, JWT |
+| 3 | [SAMS Nepal (OpenSAMS)](https://opensams.pages.dev/) | Self Project | Live | Vue 3, Vite, Node.js, Express, PostgreSQL |
+| 4 | [Nepal Live Rates](https://nepal-live-rates.pages.dev/) | Self Project | Live | HTML, CSS, JS, Node.js, Express, Chart.js |
+| 5 | [KhelZon](https://khelzon.pages.dev/) | Self Project | Live | HTML, CSS, JS, Canvas 2D, PWA |
+| 6 | [Agent Racchha](https://github.com/pradipNP/agent-racchha) | Self Project | GitHub | Python, FastAPI, React, Electron, Gemini API |
+| 7 | [Awaken The Lion](https://awaken-the-lion.pages.dev/) | Self Project | Live | HTML, CSS, JS, GSAP, Lenis |
 
-Edit projects in `js/main.js` → `PROJECTS` array.
+Edit projects in `js/main.js` → `PROJECTS` array. Screenshots live in `assets/project/`.
 
 ---
 
@@ -70,7 +74,7 @@ pradip-portfolio/
 │   │   ├── profile.jpg     # Profile photo fallback
 │   │   └── profile.mp4     # Hero profile video
 │   ├── logo/               # Tech stack icons
-│   └── project/            # Project screenshots (nlr, sc, ar)
+│   └── project/            # Project screenshots (sc, ferilo, sams, nlr, kz, ar, ll)
 ├── css/
 │   ├── main.css
 │   ├── animations.css

@@ -57,14 +57,16 @@ Other:      REST APIs, Machine Learning, Artificial Intelligence, Data Analysis`
 
 [1] Shova Creation Photography — Client Project
     Live: shovacreation.netlify.app
-[2] Nepal Live Rates — Self Project
-    Live: nepal-live-rates.pages.dev
+[2] FERILO — Self Project (Ecommerce Marketplace)
+    Live: ferilo.pages.dev
 [3] SAMS Nepal (OpenSAMS) — Self Project
     Live: opensams.pages.dev
-[4] KhelZon — Self Project (Browser Arcade PWA)
+[4] Nepal Live Rates — Self Project
+    Live: nepal-live-rates.pages.dev
+[5] KhelZon — Self Project (Browser Arcade PWA)
     Live: khelzon.pages.dev
-[5] Agent Racchha — Self Project (Windows AI Agent)
-[6] Awaken The Lion — Self Project
+[6] Agent Racchha — Self Project (Windows AI Agent)
+[7] Awaken The Lion — Self Project
     Live: awaken-the-lion.pages.dev
 
 Mini projects (ML, AI, Vue, Python): github.com/pradipNP
