@@ -268,53 +268,41 @@
 
     let lastKnownTime = 0;
 
-    /** Freeze on last frame after intro plays once (mobile-safe seek) */
+    /** Freeze on last frame after intro plays once (mobile-safe: avoid seek-after-end) */
     const freezeOnLastFrame = () => {
       if (!video) return;
 
       video.loop = false;
       video.dataset.finished = 'true';
 
-      const resolveTargetTime = () => {
-        if (Number.isFinite(video.duration) && video.duration > 0) {
-          return Math.max(0, video.duration - 0.08);
-        }
-        if (lastKnownTime > 0.1) return lastKnownTime;
-        return null;
-      };
+      // Mobile browsers often reset currentTime to 0 on ended; seeking then fails.
+      // If we still have a late frame, pause in place — do not seek.
+      if (video.currentTime > 0.15) {
+        lastKnownTime = Math.max(lastKnownTime, video.currentTime);
+        video.pause();
+        return;
+      }
 
-      const holdFrame = () => {
+      const target = lastKnownTime > 0.15
+        ? lastKnownTime
+        : (Number.isFinite(video.duration) && video.duration > 0
+          ? Math.max(0, video.duration - 0.15)
+          : null);
+
+      if (target == null) {
+        video.pause();
+        return;
+      }
+
+      const onSeeked = () => {
         video.pause();
       };
-
-      const seekAndHold = () => {
-        const targetTime = resolveTargetTime();
-        if (targetTime === null) return false;
-
-        if (Math.abs(video.currentTime - targetTime) < 0.05) {
-          holdFrame();
-          return true;
-        }
-
-        const onSeeked = () => {
-          video.removeEventListener('seeked', onSeeked);
-          holdFrame();
-        };
-
-        video.addEventListener('seeked', onSeeked, { once: true });
-
-        try {
-          video.currentTime = targetTime;
-        } catch {
-          video.removeEventListener('seeked', onSeeked);
-          holdFrame();
-        }
-
-        return true;
-      };
-
-      if (!seekAndHold()) {
-        video.addEventListener('loadedmetadata', () => seekAndHold(), { once: true });
+      video.addEventListener('seeked', onSeeked, { once: true });
+      try {
+        video.currentTime = target;
+      } catch {
+        video.removeEventListener('seeked', onSeeked);
+        video.pause();
       }
     };
 
@@ -352,12 +340,14 @@
 
     video.addEventListener('ended', freezeOnLastFrame);
 
+    // Pause just before natural end so mobile never hits ended→frame-0 reset
     video.addEventListener('timeupdate', () => {
       if (video.dataset.finished === 'true') return;
-      if (video.currentTime > 0.05) {
+      if (video.currentTime > lastKnownTime) {
         lastKnownTime = video.currentTime;
       }
-      if (Number.isFinite(video.duration) && video.duration > 0 && video.currentTime >= video.duration - 0.12) {
+      const dur = video.duration;
+      if (Number.isFinite(dur) && dur > 0 && video.currentTime >= dur - 0.25) {
         freezeOnLastFrame();
       }
     });
@@ -403,12 +393,8 @@
     }
 
     // Restore last frame when returning via browser back/forward cache
-    window.addEventListener('pageshow', (event) => {
-      if (video.dataset.finished === 'true') {
-        freezeOnLastFrame();
-      } else if (event.persisted) {
-        playVideo();
-      }
+    window.addEventListener('pageshow', () => {
+      if (video.dataset.finished === 'true') freezeOnLastFrame();
     });
 
     document.addEventListener('visibilitychange', () => {
