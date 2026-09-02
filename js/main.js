@@ -138,9 +138,22 @@
       github: 'https://github.com/pradipNP/khelzon',
       details: 'KhelZon is a framework-free browser arcade built with vanilla HTML, CSS, and JavaScript ES modules. It includes seven single-player games (Marble Quest Solo, Snake Rush, Number Cascade, Memory Matrix, Orbit Breaker, Star Drift, and Tap Sequence), a welcome lobby with multi-profile player management, per-player localStorage score tracking with JSON export/import, light and dark themes, and a Progressive Web App with service worker offline caching — live at khelzon.pages.dev on Cloudflare Pages.',
     },
-    /* 6 — AI / desktop agent */
+    /* 6 — Browser-first collaborative whiteboard */
     {
       id: 6,
+      title: 'Drawora',
+      description: 'Draw, present, export, and collaborate live in the browser — no account or install required, with Owner / Editor / Viewer roles.',
+      category: 'major',
+      categoryLabel: 'Self Project',
+      image: 'assets/project/dr.png',
+      stack: ['HTML5', 'CSS3', 'JavaScript', 'WebSockets', 'PWA', 'Cloudflare Pages'],
+      demo: 'https://drawora.pages.dev/',
+      github: 'https://github.com/pradipNP/drawora',
+      details: 'Drawora runs entirely in your browser — no account required, no install required (unless you want the PWA). It lets users draw, present, export, and collaborate live with Owner / Editor / Viewer roles. The app works offline and is deployable to Cloudflare Pages with zero build step, making it a fast and portable browser-first collaborative whiteboard experience.',
+    },
+    /* 7 — AI / desktop agent */
+    {
+      id: 7,
       title: 'Agent Racchha',
       description: 'Open-source Windows computer-use AI agent — natural language desktop control with planning, UI perception, verification, and recovery.',
       category: 'major',
@@ -151,9 +164,9 @@
       github: 'https://github.com/pradipNP/agent-racchha',
       details: 'Agent Racchha (Racchha AI) is an open-source Windows computer-use agent that understands natural language, observes the desktop via UI Automation, plans validated typed actions, controls applications, verifies results, and performs bounded recovery on failure. Built with Python/FastAPI backend, React/TypeScript/Electron frontend, Gemini API for structured intent resolution, Chrome DevTools Protocol for browser workflows, and speech input/TTS — following an Understand → Observe → Plan → Act → Verify → Recover architecture with safety allowlists and 300+ automated tests.',
     },
-    /* 7 — Immersive static showcase */
+    /* 8 — Immersive static showcase */
     {
-      id: 7,
+      id: 8,
       title: 'Awaken The Lion',
       description: 'Immersive scroll-driven showcase honouring Lumbini Lions — hero video, GSAP chapters, Lenis smooth scroll, audio, and squad narrative.',
       category: 'major',
